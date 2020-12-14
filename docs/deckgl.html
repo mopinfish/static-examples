@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js" lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css">
+    <style type="text/css">
+      @charset "UTF-8";
+
+      html, body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <script src='https://unpkg.com/deck.gl@5.2.5/deckgl.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
+    <script>
+      const LAT = 35.8;
+      const LNG = 139.2;
+
+      const deckgl = new deck.DeckGL({
+        mapboxApiAccessToken: 'pk.eyJ1IjoibW9waW5maXNoIiwiYSI6ImNqZGZreGVuajBhNjIyd29idXI3ZHFxNm4ifQ._edxUwp0j5sAl7FsK9oyrA',
+        mapStyle: 'mapbox://styles/mapbox/dark-v9',
+        longitude: LNG,
+        latitude: LAT,
+        zoom: 8,
+        pitch: 40,
+        bearing: -10
+      });
+      const loadData = () => {
+        d3.csv("./data/data.csv", (error, response) => {
+          data = response.map(function (d) {
+            console.log(d)
+            return [
+              Number(d.longitude),
+              Number(d.latitude)
+            ];
+          });
+
+          renderLayer(data);
+        });
+      };
+      const renderLayer = (data) => {
+        const hexagonLayer = new deck.HexagonLayer({
+          data,
+          getPosition: d => d,
+          radius: 2000
+        });
+
+        deckgl.setProps({
+          layers: [hexagonLayer]
+        });
+      }
+
+      loadData();
+
+    </script>
+    </body>
+    
+    </html>

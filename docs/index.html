@@ -4,13 +4,108 @@
 <meta charset="UTF-8">
 <title>TipsNote : GitHub Pages Sample</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/marx/2.0.4/marx.css">
+<script src="https://cdn.jsdelivr.net/npm/deck.gl@8.3.11/dist.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 </head>
 
 <body>
 <main>
   <h1>GitHub Pages のサンプルです</h1>
   <a href="http://www.tam-tam.co.jp/tipsnote/"><button>TipsNote に戻る</button></a>
+
+  <div class="main">
+    <div class="section" id="app1">ここ</div>
+  </div>
 </main>
+
+
+<script type="text/babel">
+import React, { useEffect, useState } from "react";
+import DeckGL from "deck.gl";
+import {
+  LightingEffect,
+  AmbientLight,
+  _SunLight as SunLight
+} from "@deck.gl/core";
+
+import { renderLayers } from "./RenderLayers";
+
+//const ambientLight = new AmbientLight({
+//  color: [255, 255, 255],
+//  intensity: 1.5
+//});
+//
+//const dirLight = new SunLight({
+//  timestamp: Date.UTC(2019, 7, 1, 23),
+//  color: [255, 255, 255],
+//  intensity: 3.0,
+//  _shadow: true
+//});
+//
+//const App = () => {
+//  const [viewport, setViewport] = useState({
+//    width: window.innerWidth,
+//    height: window.innerHeight,
+//    latitude: 35.3518736,
+//    longitude: 138.6991679,
+//    zoom: 10.5,
+//    bearing: 90,
+//    pitch: 65,
+//    maxPitch: 89
+//  });
+//
+//  const [effects] = useState(() => {
+//    const lightingEffect = new LightingEffect({ ambientLight, dirLight });
+//    lightingEffect.shadowColor = [0, 0, 0, 0.5];
+//    return [lightingEffect];
+//  });
+//
+//  //resize
+//  useEffect(() => {
+//    const handleResize = () => {
+//      setViewport((v) => {
+//        return {
+//          ...v,
+//          width: window.innerWidth,
+//          height: window.innerHeight
+//        };
+//      });
+//    };
+//    handleResize();
+//    window.addEventListener("resize", handleResize);
+//    return () => window.removeEventListener("resize", handleResize);
+//  }, []);
+//
+//  return (
+//    <>
+//      <DeckGL
+//        layers={renderLayers()}
+//        effects={effects}
+//        initialViewState={viewport}
+//        controller={true}
+//      />
+//      <div className="attribution">
+//        <a href="https://www.maptiler.com/copyright/" target="_blank">
+//          © MapTiler
+//        </a>{" "}
+//        <a href="https://www.openstreetmap.org/copyright" target="_blank">
+//          © OpenStreetMap contributors
+//        </a>
+//      </div>
+//    </>
+//  );
+//};
+</script>
+
+<!--reactスクリプト。type指定忘れずに-->
+<script type="text/babel">
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('app1')
+);
+</script>
 
 <script>
 console.log('GitHub Pages Sample');
